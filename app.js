@@ -1,17 +1,16 @@
 const express = require("express");
 const { default: mongoose } = require("mongoose");
 const passport = require("passport");
-const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/userModel");
 const bcryptjs = require("bcryptjs");
+const path = require("path");
 
 require("dotenv").config();
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI;
+const { PORT, MONGODB_URI, SECRET_KEY } = process.env;
 
 mongoose.connect(MONGODB_URI).then(() => {
   console.log("Connect to Successfully to MongoDB");
@@ -27,11 +26,28 @@ mongoDB.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(express.static(path.join(__dirname, "public")));
+
+// using connect-mongo amd express-session to store user sessions
+
+const MongoStore = require("connect-mongo");
+const session = require("express-session");
+app.use(
+  session({
+    secret: SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: MONGODB_URI }),
+  })
+);
+
+// initialize passport and session
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
+  const isAuthenticated = req.isAuthenticated();
+
   res.render("index", { user: req.user });
 });
 
@@ -64,10 +80,8 @@ app.post(
 
 app.get("/logout", (req, res, next) => {
   req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    return res.redirect("/");
+    if (err) return next(err);
+    res.redirect("/");
   });
 });
 

@@ -3,16 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index</title>
+    <title>HOME</title>
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/home.css" />
   </head>
   <body>
-    <% if (user) {%>
-    <h1>WELCOME BACK <%= user.username %></h1>
-    <a href="/logout">LOG OUT</a>
-    <% } else { %>
-    <h1>please log in</h1>
-    <a href="/login">HERE</a>
+    <header>
+      <h3>Private Club</h3>
+      <% if (user) { %>
+      <div>
+        <span class="ls-nav">
+          <a href="/logout">Logout</a>
+        </span>
+        <span class="ls-nav">
+          <a href="/clubs">Clubs</a>
+        </span>
+      </div>
+      <% } else { %>
+      <div>
+        <span class="ls-nav">
+          <a href="/login">Login</a>
+        </span>
+        <span class="ls-nav">
+          <a href="/signup">Signup</a>
+        </span>
+      </div>
+      <% } %>
+    </header>
+    <main>
+      <h1>Welcome to Private Clubs</h1>
+    </main>
 
-    <%}%>
+    <footer>
+      <h3>Footer</h3>
+    </footer>
   </body>
 </html>

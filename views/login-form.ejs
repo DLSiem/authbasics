@@ -3,24 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Log In</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/base.css" />
   </head>
   <body>
-    <h2>Log In</h2>
-    <form action="/login" method="POST">
-      <input
-        type="text"
-        name="username"
-        id="username"
-        placeholder="Enter user-name"
-      />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Enter Password"
-      />
-      <button>Log In</button>
-    </form>
+    <div class="ls-container">
+      <h1>Login</h1>
+      <form method="POST" action="/login">
+        <input
+          type="username"
+          name="username"
+          id="username"
+          placeholder="Username"
+          class="ls-input"
+        />
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          class="ls-input"
+        />
+        <br />
+        <button class="ls-button">Login</button>
+      </form>
+      <div class="ls-links">
+        <p>Don't have an account?</p>
+        <a href="/signup" class="btn btn-secondary">Signup</a>
+      </div>
+    </div>
   </body>
 </html>

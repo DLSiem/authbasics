@@ -3,24 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign-up</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/signup.css" />
+    <link rel="stylesheet" href="/css/base.css" />
   </head>
   <body>
-    <h1>Signup</h1>
-    <form action="" method="POST">
-      <input
-        type="text"
-        placeholder="Enter user-name"
-        name="username"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Enter Password"
-      />
-      <button>Submit</button>
-    </form>
+    <div class="ls-container">
+      <h1>Signup</h1>
+      <form method="POST" action="signup">
+        <input
+          type="username"
+          name="username"
+          id="username"
+          placeholder="Username"
+          class="ls-input"
+          required
+          onchange="this.setCustomValidity('')"
+        />
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          class="ls-input"
+          required
+        />
+        <br />
+        <button class="ls-button">Signup</button>
+      </form>
+
+      <div class="ls-links">
+        <p>Already Signup?</p>
+        <a href="/login">Login</a>
+      </div>
+    </div>
   </body>
 </html>
